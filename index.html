@@ -187,28 +187,34 @@
         yesScale += 0.1;
         yesBtn.style.transform = `scale(${yesScale})`;
 
+        // Move the No button to a random position
+        const container = document.querySelector(".container");
+        const containerRect = container.getBoundingClientRect();
+        const btnWidth = noBtn.offsetWidth;
+        const btnHeight = noBtn.offsetHeight;
+        // Calculate random position within container
+        const maxLeft = containerRect.width - btnWidth - 10;
+        const maxTop = containerRect.height - btnHeight - 10;
+        const randomLeft = Math.random() * maxLeft;
+        const randomTop = Math.random() * maxTop;
+        noBtn.style.position = "absolute";
+        noBtn.style.left = `${randomLeft}px`;
+        noBtn.style.top = `${randomTop}px`;
+
+        // Change text and shrink as before
         if (noClickCount === 1) {
-            // First click: shrink
             noScale *= 0.7;
             noBtn.style.transform = `scale(${noScale})`;
-            noBtn.innerText = "3afak ☹️"
+            noBtn.innerText = "3afak ☹️";
         } else if (noClickCount === 2) {
-            // Second click: shrink again
             noScale *= 0.7;
             noBtn.style.transform = `scale(${noScale})`;
-            noBtn.innerText = "chufi okan 😢"
+            noBtn.innerText = "chufi okan 😢";
         } else if (noClickCount === 3) {
-            // Third click: move down by 20px
-            const currentTop = parseFloat(noBtn.style.top || 0);
-            noBtn.style.top = (currentTop + 100) + "px";
-            noBtn.innerText = "lah ir7am lwalidine 😭"
+            noBtn.innerText = "lah ir7am lwalidine 😭";
         } else if (noClickCount === 4) {
-            // Fourth click: move to top corner
-            noBtn.style.left = "0px";
-            noBtn.style.top = "-200px";
-            noBtn.innerText = "Nbouss lik rjlik yallah"
+            noBtn.innerText = "Nbouss lik rjlik yallah";
         } else if (noClickCount >= 5) {
-            // Fifth click: disappear
             noBtn.style.display = "none";
         }
     });
