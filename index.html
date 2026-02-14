@@ -18,6 +18,34 @@
         overflow: hidden;
     }
 
+    .heart {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        left: 50%;
+        top: 50%;
+        pointer-events: none;
+        z-index: 100;
+        animation: floatHeart 4s linear forwards;
+    }
+    .heart svg {
+        width: 100%;
+        height: 100%;
+    }
+    @keyframes floatHeart {
+        0% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        80% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-400px) scale(1.3);
+        }
+    }
+
     .container {
         background: white;
         padding: 40px;
@@ -138,6 +166,9 @@
         <br>
         <img id="happyGif" src="" alt="Happy Gif" style="display:none;max-width:200px;margin-top:20px;border-radius:12px;" />
     </div>
+
+    <!-- Sound effect -->
+    <audio id="valentineSound" src="https://cdn.pixabay.com/audio/2022/02/23/audio_115b6b6b7b.mp3" preload="auto"></audio>
 </div>
 
 <script>
@@ -191,7 +222,31 @@
         happyGif.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHB4d3FzcTVhb2V6ZXlyM3VpNWQ2MjM3ZTFwM3dpZmliZ2twNzl6ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Fu3OjBQiCs3s0ZuLY3/giphy.gif";
         happyGif.style.display = "block";
         happyGif.style.margin = "auto";
+
+        // Play sound effect
+        const sound = document.getElementById("valentineSound");
+        sound.currentTime = 0;
+        sound.play();
+
+        // Floating hearts animation
+        for (let i = 0; i < 15; i++) {
+            setTimeout(() => {
+                createHeart();
+            }, i * 150);
+        }
     });
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 90 + "%";
+        heart.style.top = (60 + Math.random() * 20) + "%";
+        heart.innerHTML = `<svg viewBox="0 0 32 29.6"><path fill="#ff4d6d" d="M23.6,0c-3.4,0-6.4,2.1-7.6,5.3C14.8,2.1,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,7.1,13.6,21.2,15.2,21.2S32,15.5,32,8.4C32,3.8,28.2,0,23.6,0z"/></svg>`;
+        document.body.appendChild(heart);
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+    }
 </script>
 
 </body>
