@@ -154,7 +154,7 @@
 <body>
 
 <div class="container">
-    <h1>safou2a tkuni my valentine?</h1>
+    <h1 id="question">safou2a tkuni my valentine?</h1>
 
     <div class="buttons">
         <button id="yesBtn">Ayeh 💕</button>
@@ -172,6 +172,7 @@
 </div>
 
 <script>
+    const question = document.getElementById("question")
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const message = document.getElementById("message");
@@ -220,6 +221,7 @@
     });
 
     yesBtn.addEventListener("click", () => {
+        question.style.display = "none"
         document.querySelector(".buttons").classList.add("hidden");
         message.classList.remove("hidden");
         document.body.style.background = "linear-gradient(135deg, #ff4d6d, #ff9a9e)";
@@ -257,6 +259,7 @@
 
 </body>
 </html>
+
 
 
 
